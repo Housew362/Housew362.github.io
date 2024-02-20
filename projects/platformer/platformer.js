@@ -44,9 +44,16 @@ $(function () {
     // You must decide the x position, y position, width, and height of the platforms
     // example usage: createPlatform(x,y,width,height)
 
-
-
+    createPlatform(800, 620, 300, 20); // first platform from the bottom
+    createPlatform(420, 490, 300, 20); // second platform from the bottom
+    createPlatform(1100, 420, 280, 20); // third platform from the bottom
+    createPlatform(680, 355, 300, 20); // fourth platform from the bottom
+    createPlatform(200, 230, 300, 20); // fifth platform from the bottom
+    createPlatform(150, 100, 20, 550); // side tunnel
+    createPlatform(0, 100, 170, 20); //top of tunnel
+    createPlatform(150, 630, 100, 20); //mouth of tunnel
     
+
     // TODO 2
     // Create collectables
     // You must decide on the collectable type, the x position, the y position, the gravity, and the bounce strength
