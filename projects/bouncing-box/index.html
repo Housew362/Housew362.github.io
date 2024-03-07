@@ -75,9 +75,15 @@
 				/* Want to increase the value of positionX by 10 */
 				positionX = positionX + speed;
 				moveBoxTo(positionX);
-				
+				if (positionX > boardWidth) {
+					speed = speed * -1;
+				}	
+				if (positionX < boardWidth) {
+					speed = speed * 1;
+				}
 			};
 
+			
 			/* 
 			This Function will be called each time the box is clicked. Each time it is called,
 			it should increase the points total, increase the speed, and move the box to
