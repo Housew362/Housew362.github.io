@@ -20,6 +20,11 @@
 		.board{
 			height: 100vh;
 		}
+		body {
+			background-image: url("Winnie The Pooh Background 3.png");
+			background-size: 1900px;
+			background-repeat: no-repeat;
+		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
@@ -78,8 +83,8 @@
 				if (positionX > boardWidth) {
 					speed = speed * -1;
 				}	
-				if (positionX < boardWidth) {
-					speed = speed * 1;
+				if (positionX < 0) {
+					speed = speed * -1;
 				}
 			};
 
@@ -93,8 +98,12 @@
 				positionX = 0;
 				points = points + 1;
 				changeBoxText(points);
-				speed = speed + 3;
-
+				if (speed > 0) {
+					speed = speed + 3;
+				}
+				else if (speed < 0) {
+					speed = speed - 3;
+				}
 			};
 		})();
 	</script>
