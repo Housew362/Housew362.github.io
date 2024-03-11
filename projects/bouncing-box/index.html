@@ -8,13 +8,13 @@
 		.box {
 			width: 70px;
 			height: 70px;
-			background-color: rgb(230, 153, 11);
+			background-color: rgb(248, 218, 119);
 			font-size: 300%;
 			text-align: center;
 			user-select: none;
 			display: block;
 			position: absolute;
-			top: 100px;
+			top: 400px;
 			left: 0px;  /* <--- Change me! */
 		}
 		.board{
@@ -53,9 +53,10 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
-				box.css("left", newPositionX);
-			}
+			function moveBoxTo(positionX, positionY) {
+					box.css('left', newPositionX);
+					box.css('top', newPositionY);
+					}
 
 			// changes the text displayed on the Box
 			function changeBoxText(newText) {
@@ -70,6 +71,8 @@
 			var positionX = 0;
 			var points = 0;
 			var speed = 10;
+			var positionY;
+			var speedY;
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
