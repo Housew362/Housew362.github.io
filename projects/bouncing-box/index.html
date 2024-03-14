@@ -48,7 +48,8 @@
 			var positionY = 0;
 			var speedY = 10;
 			var boardHeight = jQuery(window).height();
-			var randNum = Math.random() * 100;
+			var randNum = Math.random() * 1000;
+			var boardWidth = jQuery(window).height();
 
 			// Every 50 milliseconds, call the update Function (see below)
 			setInterval(update, 50);
@@ -83,10 +84,13 @@
 			*/
 			function update() {
 				/* Want to increase the value of positionX by 10 */
+
 				positionX = positionX + speed;
+				positionY = positionY + speedY;
+
 				moveBoxTo(positionX);
 				moveBoxTo(positionX, positionY);
-				positionY = positionY + speedY;
+				
 				if (positionX > boardWidth) {
 					speed = speed * -1;
 				}	
@@ -111,11 +115,21 @@
 				positionX = 0;
 				points = points + 1;
 				changeBoxText(points);
+				speed = speed + 3;
+				speedY = speedY + 3;
+				randNumX = Math.random() * boardWidth;
+				randNumY = Math.random() * boardHeight;
+				positionX = randNumX;
+				positionY = randNumY;
+
 				if (speed > 0) {
 					speed = speed + 3;
 				}
 				else {
 					speed = speed - 3;
+				}
+				if (speedY > 0) {
+					speedY
 				}
 			};
 		})();
