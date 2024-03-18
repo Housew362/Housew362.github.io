@@ -1,140 +1,141 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Bouncing Box</title>
-	<script src="jquery.min.js"></script>
-	<style>
-		.box {
-			width: 70px;
-			height: 70px;
-			background-color: rgb(248, 218, 119);
-			font-size: 300%;
-			text-align: center;
-			user-select: none;
-			display: block;
-			position: absolute;
-			top: 400px;
-			left: 900px;  /* <--- Change me! */
-		}
-		.board{
-			height: 100vh;
-		}
-		body {
-			background-image: url("Winnie The Pooh Background 3.png");
-			background-size: 1900px;
-			background-repeat: no-repeat;
-		}
-	</style>
-	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  <head>
+    <meta charset="utf-8" />
+    <title>Bouncing Box</title>
+    <script src="jquery.min.js"></script>
+    <style>
+      .box {
+        width: 70px;
+        height: 70px;
+        background-color: rgb(248, 218, 119);
+        font-size: 300%;
+        text-align: center;
+        user-select: none;
+        display: block;
+        position: absolute;
+        top: 400px;
+        left: 900px; /* <--- Change me! */
+      }
+      .board {
+        height: 100vh;
+      }
+      body {
+        background-image: url("Winnie The Pooh Background 3.png");
+        background-size: 1900px;
+        background-repeat: no-repeat;
+      }
+    </style>
+    <!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  </head>
+  <body class="board">
+    <!-- HTML for the box -->
+    <div class="box">?</div>
 
-</head>
-<body class="board">
-	<!-- HTML for the box -->
-	<div class="box">?</div>
+    <script>
+      (function () {
+        "use strict";
+        /* global jQuery */
 
-	<script>
-		(function(){
-			'use strict'
-			/* global jQuery */
+        //////////////////////////////////////////////////////////////////
+        /////////////////// SETUP DO NOT DELETE //////////////////////////
+        //////////////////////////////////////////////////////////////////
 
-			//////////////////////////////////////////////////////////////////
-			/////////////////// SETUP DO NOT DELETE //////////////////////////
-			//////////////////////////////////////////////////////////////////
-			
-			var box = jQuery('.box');	// reference to the HTML .box element
-			var board = jQuery('.board');	// reference to the HTML .board element
-			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
-			
-			// Every 50 milliseconds, call the update Function (see below)
-			setInterval(update, 50);
-			
-			// Every time the box is clicked, call the handleBoxClick Function (see below)
-			box.on('click', handleBoxClick);
+        var box = jQuery(".box"); // reference to the HTML .box element
+        var board = jQuery(".board"); // reference to the HTML .board element
+        var boardWidth = board.width(); // the maximum X-Coordinate of the screen
 
-			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX, newPositionY) {
-					box.css('left', newPositionX);
-					box.css('top', newPositionY);
-					}
+        // Every 50 milliseconds, call the update Function (see below)
+        setInterval(update, 50);
 
-			// changes the text displayed on the Box
-			function changeBoxText(newText) {
-				box.text(newText);
-			}
+        // Every time the box is clicked, call the handleBoxClick Function (see below)
+        box.on("click", handleBoxClick);
 
-			//////////////////////////////////////////////////////////////////
-			/////////////////// YOUR CODE BELOW HERE /////////////////////////
-			//////////////////////////////////////////////////////////////////
-			
-			// TODO 2 - Variable declarations 
-			var positionX = 0;
-			var points = 0;
-			var speed = 10;
-			var positionY = 0;
-			var speedY = 10;
-			var boardHeight = jQuery(window).height();
-			var randNum = Math.random() * 100;
-			var boardWidth = jQuery(window).width();
+        // moves the Box to a new position on the screen along the X-Axis
+        function moveBoxTo(newPositionX, newPositionY) {
+          box.css("left", newPositionX);
+          box.css("top", newPositionY);
+          box.css("background-color", colorStr);
+        }
 
-			/* 
+        // changes the text displayed on the Box
+        function changeBoxText(newText) {
+          box.text(newText);
+        }
+
+        //////////////////////////////////////////////////////////////////
+        /////////////////// YOUR CODE BELOW HERE /////////////////////////
+        //////////////////////////////////////////////////////////////////
+
+        // TODO 2 - Variable declarations
+        var positionX = 0;
+        var points = 0;
+        var speed = 10;
+        var positionY = 0;
+        var speedY = 10;
+        var boardHeight = jQuery(window).height();
+        var randNum = Math.random() * 100;
+        var colorStr = "rgb(200, 150, 0)";
+        var randomNumberTo255 = Math.random() * 255;
+
+        /* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
 			turn it around! 
 			*/
-			function update() {
-				/* Want to increase the value of positionX by 10 */
+        function update() {
+          /* Want to increase the value of positionX by 10 */
 
-				positionX = positionX + speed;
-				positionY = positionY + speedY;
-				
-				moveBoxTo(positionX, positionY);
-				
-				if (positionX > boardWidth) {
-					speed = speed * -1;
-				}	
-				if (positionX < 0) {
-					speed = speed * -1;
-				}
-				if (positionY > boardHeight) {
-					speedY = speedY * -1;
-				}
-				if (positionY < 0) {
-					speedY = speedY * -1;
-				}
-			};
+          positionX = positionX + speed;
+          positionY = positionY + speedY;
 
-			
-			/* 
+          moveBoxTo(positionX, positionY);
+
+          if (positionX > boardWidth) {
+            speed = speed * -1;
+          }
+          if (positionX < 0) {
+            speed = speed * -1;
+          }
+          if (positionY > boardHeight) {
+            speedY = speedY * -1;
+          }
+          if (positionY < 0) {
+            speedY = speedY * -1;
+          }
+        }
+
+        /* 
 			This Function will be called each time the box is clicked. Each time it is called,
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
-			function handleBoxClick() {
-				positionX = 0;
-				points = points + 1;
-				changeBoxText(points);
-				speed = speed + 3;
-				speedY = speedY + 3;
-				randNum = Math.random() * boardHeight;
-				randNumY = Math.random() * boardWidth;
-				positionX = randNum;
-				positionY = randNumY;
+        function handleBoxClick() {
+          positionX = 0;
+          points = points + 1;
+          changeBoxText(points);
+          speed = speed + 3;
+          speedY = speedY + 3;
+          randNum = Math.random() * boardHeight;
+          randNumY = Math.random() * boardWidth;
+          positionX = randNum;
+          positionY = randNumY;
 
-				if (speed > 0) {
-					speed = speed + 3;
-				}
-				else {
-					speed = speed - 3;
-				}
-				if (speedY > 0) {
-					speedY = speedY + 3;
-				}
-				else {
-					speedY = speedY - 3;
-				}
-			};
-		})();
-	</script>
-</body>
+          if (speed > 0) {
+            speed = speed + 3;
+          } else {
+            speed = speed - 3;
+          }
+          if (speedY > 0) {
+            speedY = speedY + 3;
+          } else {
+            speedY = speedY - 3;
+          }
+          function getRandomColor() {
+            colorStr = "rgb(" + randomNumberTo255 + ", " + randomNumberTo255 + ", " + randomNumberTo255 + ")";
+          }
+        }
+      })();
+    </script>
+  </body>
 </html>
